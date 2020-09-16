@@ -44,10 +44,8 @@ training sreenshot
 ```shell script
 sh test-cn.sh
 ```
-test result
+test result after 5 min training
 
 ![test](./doc/test.png)
-
-
 
 ## train on AWS SageMaker
