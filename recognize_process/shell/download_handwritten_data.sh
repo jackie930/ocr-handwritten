@@ -11,7 +11,16 @@ aws s3 cp s3://csdc-ocr-ml-dev/chinese-ocr./手写签名.zip  .
 #unzip
 unzip -P chineseocr 手写签名.zip
 
-#move all files into one folder
+#make output dir
+BASE_DIR="./data_cn/"
+
+if [ ! -d ${BASE_DIR} ];then
+mkdir ${BASE_DIR}
+fi
+
+#move all png files into one folder
+
+
 
 #generate one single label txt
 
