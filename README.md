@@ -38,6 +38,7 @@ sh train-cn.sh
 training sreenshot
 
 ![train](./doc/train.png)
+![loss](./doc/loss.png)
 
 ### test
 
