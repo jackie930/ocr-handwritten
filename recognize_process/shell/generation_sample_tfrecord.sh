@@ -28,9 +28,9 @@ fi
 echo "start --------- generate  tfrecord "
 
 python ../data_provider/write_tfrecord.py \
---dataset_dir='../sample_data/images' \
+--dataset_dir='../../sample_data/images' \
 --char_dict_path=${SAVE_DIR}'char_map.json' \
---anno_file_path='../sample_data/label.txt' \
+--anno_file_path='../../sample_data/label.txt' \
 --save_dir=${SAVE_DIR}'tfrecords/'
 
 
