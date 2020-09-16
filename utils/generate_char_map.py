@@ -82,39 +82,6 @@ def generate_char_map(lines, output_dir):
     print('【输出】生成 Char dict 文件  输出路径{}, 文件行数 {}.'.format(char_map_json_file, len(char_map)))
     print('【输出】生成 Ord  map  文件  输出路径{}, 文件行数 {}.'.format(ord_map_json_file, len(ord_map)))
 
-
-def combined_line(output_dir,
-                  lines, min_chars_count, max_chars_count):
-    """
-    :param lines:
-    :param output_dir
-    :param min_chars_count:
-    :param max_chars_count:
-    :return:
-    """
-    random.seed(42)
-    new_lines = []
-    for line in lines:
-        while True:
-            line = line.replace(' ', '').replace('\r', '').replace('\n', '').replace('\t', '')
-            count = random.randint(min_chars_count, max_chars_count)
-            if len(line) > count:
-                new_lines.append(line[0:count])
-                line = line[count:]
-            else:
-                break
-
-    output_file = os.path.join(output_dir, 'text_split.txt')
-
-    with open(output_file, 'w',  encoding='utf-8') as f:
-        for new_line in new_lines:
-
-            f.write(new_line+'\n')
-            #print("\r{}".format(new_line))
-    print("Write {} lines in file [{}]".format(len(new_lines) , output_file))
-    return output_file, len(new_lines)
-
-
 def main():
     time_start = time.time()
     # Argument parsing
