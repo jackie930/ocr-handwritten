@@ -2,19 +2,8 @@
 
 This repo is be used for ocr-handwritten recognition via CRNN
 
-# Quick start
+# Data
 
-
-
-## build environment
-
-```shell script
-conda create -n  ocr-cn python=3.6 pip scipy numpy ##运用conda 创建python环境
-source activate ocr-cn
-pip install -r requirements.txt -i https://mirrors.163.com/pypi/simple/
-```
-
-## prepare data
 
 we have two ways to generate input data
 * from open source
@@ -32,6 +21,17 @@ handwritten sample
 
 ![input](./doc/image.png)
 
+# Quick start
+
+## build environment
+
+```shell script
+conda create -n  ocr-cn python=3.6 pip scipy numpy ##运用conda 创建python环境
+source activate ocr-cn
+pip install -r requirements.txt -i https://mirrors.163.com/pypi/simple/
+```
+
+## prepare data
 
 ```shell script
 # download handwritten data
