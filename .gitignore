@@ -130,3 +130,5 @@ dmypy.json
 !/utils/char_map.json
 !/utils/char_dict.json
 !/utils/ord_map.json
+!/recognize_process/shell/data_cn/
+/sample_data/
