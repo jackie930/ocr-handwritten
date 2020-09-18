@@ -7,9 +7,10 @@ startTime_s=`date +%s`
 
 #copy from s3
 #TODO: public the data access
-#aws s3 cp s3://csdc-ocr-ml-dev/chinese-ocr./手写签名.zip  .
+aws s3 cp s3://csdc-ocr-ml-dev/chinese-ocr./手写签名.zip  .
 #unzip
-#unzip -P chineseocr 手写签名.zip
+unzip -P chineseocr 手写签名.zip
+mv ./手写签名 ./data_handwritten
 
 #make output dir
 BASE_DIR="./data_cn/"
@@ -20,7 +21,7 @@ fi
 
 #move all png files into one folder
 python ../../utils/preprocess_images.py \
---orig_path '../../test' \
+--orig_path './data_handwritten' \
 --output_dir ${BASE_DIR} \
 --output_images_dir ${BASE_DIR}'images'
 
