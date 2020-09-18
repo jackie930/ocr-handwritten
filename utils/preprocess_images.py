@@ -102,10 +102,10 @@ def gci(ori_path):
         for f in fs:
             res.append(os.path.join(fpathe,f))
 
-    print ("<<<<<",res)
+    #print ("<<<<<",res)
     #split to label list and image list
     label_ls = [i for i in res if os.path.splitext(i)[1]=='.txt']
-    img_ls = [i for i in res if os.path.splitext(i)[1]=='.png']
+    img_ls = [i for i in res if os.path.splitext(i)[1]=='.jpg']
     print ("label list<<<<<",label_ls)
     print ("image list<<<<<",img_ls)
     return label_ls, img_ls
@@ -119,7 +119,7 @@ def generate_single_lable(label_ls,output_dir):
             for line in fin.readlines():
                 line = line.strip('\n')
                 line_ls.append(line)
-        res.append(i.split('/')[-1].replace('.txt','.png')+' '+line)
+        res.append(i.split('/')[-1].replace('.txt','.jpg')+' '+line)
 
     generate_char_map(line_ls,output_dir)
     print ("<<<< generate char map success")
@@ -142,7 +142,7 @@ def move_all_pngs(ori_path,output_images_dir):
         for root,dirs,files in os.walk(ori_path):
             for file in files:
                 #TODO:add support for all image types
-                if os.path.splitext(file)[1]=='.png':
+                if os.path.splitext(file)[1]=='.jpg':
                     src_file = os.path.join(root, file)
                     shutil.copy(src_file, output_images_dir)
                     print(src_file)
