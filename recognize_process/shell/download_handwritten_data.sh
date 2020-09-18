@@ -7,9 +7,9 @@ startTime_s=`date +%s`
 
 #copy from s3
 #TODO: public the data access
-aws s3 cp s3://csdc-ocr-ml-dev/chinese-ocr./手写签名.zip  .
+#aws s3 cp s3://csdc-ocr-ml-dev/chinese-ocr./手写签名.zip  .
 #unzip
-unzip -P chineseocr 手写签名.zip
+#unzip -P chineseocr 手写签名.zip
 
 #make output dir
 BASE_DIR="./data_cn/"
@@ -19,10 +19,10 @@ mkdir ${BASE_DIR}
 fi
 
 #move all png files into one folder
-
-
-
-#generate one single label txt
+python ../../utils/preprocess_images.py \
+--orig_path '../../test' \
+--output_dir ${BASE_DIR} \
+--output_images_dir ${BASE_DIR}'images'
 
 endTime=`date +%Y%m%d-%H:%M`
 endTime_s=`date +%s`

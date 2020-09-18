@@ -1,12 +1,52 @@
 # -*- coding: utf-8 -*-
 # @Time    : 9/16/20 9:15 PM
 # @Author  : Jackie
-# @File    : sub_move.py
+# @File    : preprocess_images.py
 # @Software: PyCharm
 
 import os
 import json
 import errno
+import shutil
+import argparse
+
+def parse_arguments():
+    """
+        Parse the command line arguments of the program.
+    """
+
+    parser = argparse.ArgumentParser(
+        description="生成charmap，移动图片目录"
+    )
+    parser.add_argument(
+        "-i",
+        "--orig_path",
+        type=str,
+        nargs="?",
+        help="The input directory containing source images and txt",
+        default="output/",
+        required=True
+    )
+    parser.add_argument(
+        "-o",
+        "--output_dir",
+        type=str,
+        nargs="?",
+        help="When set, this argument uses a specified text file as source for the text",
+        default="",
+        required=True
+    )
+    parser.add_argument(
+        "-oi",
+        "--output_images_dir",
+        type=str,
+        nargs="?",
+        help="When set, this argument uses a specified text file as source for the text",
+        default="",
+        required=True
+    )
+
+    return parser.parse_args()
 
 def generate_char_map(lines, output_dir):
     """
@@ -58,7 +98,7 @@ def generate_char_map(lines, output_dir):
 def gci(ori_path):
     #get full filename list
     res = []
-    for fpathe,dirs,fs in os.walk(orig_path):
+    for fpathe,dirs,fs in os.walk(ori_path):
         for f in fs:
             res.append(os.path.join(fpathe,f))
 
@@ -90,20 +130,34 @@ def generate_single_lable(label_ls,output_dir):
 
     print ("<<<< Convert label txt success")
 
+def move_all_pngs(ori_path,output_images_dir):
+    'move all pngs under one output directory'
+    # root 所指的是当前正在遍历的这个文件夹的本身的地址
+    # dirs 是一个 list，内容是该文件夹中所有的目录的名字(不包括子目录)
+    # files 同样是 list, 内容是该文件夹中所有的文件(不包括子目录)
+    if not os.path.exists(output_images_dir):
+        os.makedirs(output_images_dir)
 
-##TODO: move all pngs
-def move_all_pngs(img_ls,output_dir):
-    return None
+    if os.path.exists(ori_path):
+        for root,dirs,files in os.walk(ori_path):
+            for file in files:
+                #TODO:add support for all image types
+                if os.path.splitext(file)[1]=='.png':
+                    src_file = os.path.join(root, file)
+                    shutil.copy(src_file, output_images_dir)
+                    print(src_file)
+    print('<<<< Move images Done!')
 
-def main(ori_path,output_dir):
+def main():
     # Create the directory if it does not exist.
+    args = parse_arguments()
     try:
-        os.makedirs(output_dir)
+        os.makedirs(args.output_dir)
     except OSError as e:
         if e.errno != errno.EEXIST:
             raise
 
-    img_dir = os.path.join(output_dir,'images')
+    img_dir = os.path.join(args.output_dir,'images')
 
     try:
         os.makedirs(img_dir)
@@ -111,10 +165,9 @@ def main(ori_path,output_dir):
         if e.errno != errno.EEXIST:
             raise
 
-    label_ls, img_ls =gci(ori_path)
-    generate_single_lable(label_ls,output_dir)
+    label_ls, img_ls =gci(ori_path=args.orig_path)
+    generate_single_lable(label_ls,args.output_dir)
+    move_all_pngs(args.orig_path,args.output_images_dir)
 
 if __name__ == "__main__":
-    orig_path = '../test'
-    output_dir='./'
-    main(orig_path, output_dir)
+    main()
