@@ -106,8 +106,8 @@ def gci(ori_path):
     #split to label list and image list
     label_ls = [i for i in res if os.path.splitext(i)[1]=='.txt']
     img_ls = [i for i in res if os.path.splitext(i)[1]=='.jpg']
-    print ("label list<<<<<",label_ls)
-    print ("image list<<<<<",img_ls)
+    print ("length of label list<<<<<",len(label_ls))
+    print ("length of image list<<<<<",len(img_ls))
     return label_ls, img_ls
 
 def generate_single_lable(label_ls,output_dir):
@@ -115,11 +115,14 @@ def generate_single_lable(label_ls,output_dir):
     res = []
     line_ls = []
     for i in label_ls:
-        with open(i,'r',encoding='utf8') as fin:
-            for line in fin.readlines():
-                line = line.strip('\n')
-                line_ls.append(line)
-        res.append(i.split('/')[-1].replace('.txt','.jpg')+' '+line)
+        try:
+            with open(i,'r',encoding='utf8') as fin:
+                for line in fin.readlines():
+                    line = line.strip('\n')
+                    line_ls.append(line)
+            res.append(i.split('/')[-1].replace('.txt','.jpg')+' '+line)
+        except:
+            continue
 
     generate_char_map(line_ls,output_dir)
     print ("<<<< generate char map success")
