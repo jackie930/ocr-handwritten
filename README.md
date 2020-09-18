@@ -34,9 +34,12 @@ handwritten sample
 
 
 ```shell script
-# generate handwritten data
+# download handwritten data
 cd ./recognize_process/shell
 sh download_handwritten_data.sh
+
+#generate tfrecord
+sh generation_handwritten_tfrecord.sh ./label.txt 0.2
 ```
 
 ## training 
