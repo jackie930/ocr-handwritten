@@ -38,15 +38,19 @@ sh train-cn.sh
 training sreenshot
 
 ![train](./doc/train.png)
+
 ![loss](./doc/loss.png)
+
+![loss](./doc/train4.png)
 
 ### test
 
 ```shell script
 sh test-cn.sh
 ```
-test result after 5 min training
+test result after 30 min training
 
-![test](./doc/test.png)
+![test](./doc/train3.png)
+![test](./doc/train2.png)
 
 ## train on AWS SageMaker
