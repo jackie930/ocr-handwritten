@@ -28,6 +28,16 @@ sample input data from open source
 
 ![input2](./doc/input2.png)
 
+handwritten sample
+
+![input](./doc/image.png)
+
+
+```shell script
+# generate handwritten data
+cd ./recognize_process/shell
+sh download_handwritten_data.sh
+```
 
 ## training 
 
